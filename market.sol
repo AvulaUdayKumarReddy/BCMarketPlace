@@ -4,13 +4,13 @@ pragma solidity ^0.8.25;
 //import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 contract market {
-    
+// this enum is to maintain the status.    
     enum ItemStatus{
         Active,
         Sold,
         Cancelled
     }
-
+// Item data structure to store the data item.
     struct Item {
         int IID;
         ItemStatus status;
@@ -43,7 +43,8 @@ function getItems(uint itemId) public view returns(Item memory) {
 
 }
 function listItems(string memory title, string memory description,uint price) external {
-   c++;
+   c++; // to maintain the ID
+// to initialize the item
  Item memory item =Item(
     c,
     ItemStatus.Active,
@@ -63,15 +64,18 @@ function listItems(string memory title, string memory description,uint price) ex
     price
  );
 }
-
+// this function is for buying
 function buy(uint itemId) external payable  {
     Item storage item = _items[itemId];
+// checks if listing is active
     require (item.status == ItemStatus.Active,"Listing is not active");
+//checks if the buyer is seller
     require (msg.sender!=item.seller, "Seller cannot by their own things");
-
+//checks if the buyer has sufficient funds
     require(msg.value >= item.price, "Insufficient amount");
-
+//changing the item status
     item.status = ItemStatus.Sold;
+//transfering the ETH
     payable(item.seller).transfer(item.price);
     item.seller = msg.sender;
     emit Sale(
@@ -81,7 +85,7 @@ function buy(uint itemId) external payable  {
  );
 
 }
-
+// function that returns all items to website.
 function getAllItems() public view returns (Item[] memory) {
         Item[] memory allItems = new Item[](_itemId);
         for (uint256 i = 0; i < _itemId; i++) {
