@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethereum Marketplace</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    
+    <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px; background-color: #36454F; color: #fff;">
+        <button id = "connect-wallet1">Connect Wallet</button>
+        <h1 style="margin: 0;">Affordable MarketPlace</h1>
+    </div>
+    
+    
+    <main>
+        
+        <section id="get_items">
+            <button id ="popupButton" onclick = "openForm()" >List New Item</button> 
+            <button onclick = "displayItems()">Display Avialable Items</button>
+            <button onclick = "displayItemsSold()">Display Sold Items</button>
+            <button onclick = "displayBoughtItems()">Display Bought Items</button>
+            
+        <h1>Marketplace Items</h1>
+        <h4> Please click on the display buttons to see the transactional changes. </h4>
+        <ul id="itemList"></ul>
+    
+        </section>
+
+        <div id="popupForm" class="popupForm">
+            <span class="closeButton" onclick="closeForm()">&times;</span>
+            <h2>List Item</h2>
+            <input type="text" id="title" placeholder="Title">
+            <textarea id="description" placeholder="Description"></textarea>
+            <input type="text" id="price" placeholder="Price">
+            <button onclick="listItem()">List Item</button>
+          </div>
+
+    </main>
+    
+    <script src ="https://cdnjs.cloudflare.com/ajax/libs/web3/1.7.0-rc.0/web3.min.js"></script>
+    <script src="script.js"></script>
+    
+</body>
+</html>
